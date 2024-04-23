@@ -1,3 +1,5 @@
+import ChatWS from "./ChatWS";
+
 export default class ChatAPI {
     constructor() {
         this.url = 'http://localhost:3000/'
@@ -13,12 +15,12 @@ export default class ChatAPI {
         });
 
         const result = await request;
-        console.log(result);
+        const json = await result.json();
+        new ChatWS().createWS(json.user.name);
         if(!result.ok) {
             return false;
         } else {
-            return true;
+            return json.user.name;
         }
     }
-
 }

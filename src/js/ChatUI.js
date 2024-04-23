@@ -22,15 +22,26 @@ export default class ChatUI {
                     <div class="clients_list"></div>
                   </div>
                   <div class="window chat_messages">
+                    <div class="chat_messages_space"></div>
                     <div class="chat_send_message">
-                      <input type="text" class="input chat_input" placeholder="Введите ваше сообщение">
+                      <textarea class="input chat_input" rows="1" cols="33" wrap="hard" placeholder="Введите ваше сообщение"></textarea>
                       <button class="button chat_button">Отправить</button>
                     </div>
                   </div>
                 </div>`
         }
 
-        onlineUser(user) {
-            return `<div class="online_user">${user}</div>`
+        onlineUser(user, youClass) {
+            return `<div class="online_user ${youClass}">${user}</div>`
+        }
+
+        message(youClass, user, date, text) {
+            return `<div class="message ${youClass}">
+                        <div class="message_title">
+                            <span class="message_username">${user}</span>
+                            <span class="message_date">${date}</span>
+                        </div>
+                        <p class="message_text"">${text}</p>
+                    </div>`
         }
 }

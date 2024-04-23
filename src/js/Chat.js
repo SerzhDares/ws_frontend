@@ -1,15 +1,13 @@
 import ChatAPI from "./ChatAPI";
 import ChatUI from "./ChatUI";
-import ChatWS from "./ChatWS";
 
 export default class Chat {
   constructor() {
     this.api = new ChatAPI();
     this.ui = new ChatUI();
-    this.ws = new ChatWS();
     this.container = document.querySelector('.container');
+    this.messages = [];
   }
-
 
   init() {
     this.drawLoginForm();
@@ -24,15 +22,34 @@ export default class Chat {
     this.container.insertAdjacentHTML('afterbegin', this.ui.chatWindow());
   }
 
-  openWS() {
-    this.ws.createWS();
-  }
-
-  usersOnline(users) {
+  usersOnline(users, userName) {
     const chatClients = document.querySelector('.clients_list');
     chatClients.innerHTML = '';
     users.forEach(user => {
-      chatClients.insertAdjacentHTML('beforeend', this.ui.onlineUser(user.name));
+      if (userName === user.name) {
+        user.name = 'You';
+        chatClients.insertAdjacentHTML('beforeend', this.ui.onlineUser(user.name, 'you'));
+      } else {
+        chatClients.insertAdjacentHTML('beforeend', this.ui.onlineUser(user.name));
+      }
+    })
+  }
+
+  userExit(ws, userName) {
+    window.addEventListener('beforeunload', () => {
+      ws.send(JSON.stringify({type: 'exit', user: {name: userName}}));
+      ws.close();
+    })
+  }
+
+  sendMessage(ws, userName) {
+    document.querySelector('.chat_button').addEventListener('click', () => {
+      const message = document.querySelector('.chat_input').value;
+      if(!message) return;
+      const newMessage = {type: 'send', name: userName, msg: message};
+      this.messages.push(newMessage);
+      ws.send(JSON.stringify(newMessage, {chat: this.messages}));
+      document.querySelector('.chat_input').value = '';
     })
   }
 
@@ -55,7 +72,6 @@ export default class Chat {
           if (result) {
             document.querySelector('.nickname_window').classList.add('hidden');
             this.drawChat();
-            this.openWS();
           } else {
             nickField.classList.add('login_error');
             nickField.insertAdjacentHTML('afterend', this.ui.loginFormError());

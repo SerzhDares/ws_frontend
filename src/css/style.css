@@ -74,7 +74,7 @@ body {
 
 .chat {
   display: flex;
-  margin-top: 100px;
+  margin-top: 85px;
 }
 
 .chat_clients {
@@ -107,21 +107,63 @@ body {
 }
 
 .chat_messages {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
   padding: 20px;
   width: 600px;
-  height: 600px;
+  height: 620px;
+}
+
+.chat_messages_space {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 510px;
+  overflow-y: auto;
 }
 
 .chat_send_message {
   width: 100%;
   display: flex;
-  
+  padding: 20px 0;
 }
 
 .chat_input {
   width: 80%;
   margin-right: 10px;
+  resize: none;
+}
+
+.message {
+  border-radius: 10px;
+  padding: 10px 20px;
+  width: fit-content;
+  margin-bottom: 15px;
+  background-color: rgb(214, 210, 210);
+}
+
+.your_message {
+  align-self: flex-end;
+  background-color: rgba(202, 208, 208, 0.941);
+}
+
+.message_username {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.you {
+  font-weight: bold;
+  color: rgb(28, 56, 87);
+}
+
+.message_date {
+  font-style: italic;
+  font-size: 16px;
+}
+
+.message_text {
+  font-size: 18px;
+  margin-bottom: 10px;
+  margin-top: 15px;
+  word-break: break-all;
+  white-space: pre-wrap;
 }
