@@ -1,0 +1,169 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family:'Segoe UI', Tahoma, sans-serif;
+  background-color: rgb(245, 241, 241);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.window {
+  border-radius: 20px;
+  background-color: rgb(230, 227, 227);
+  box-shadow: 1px 1px 20px rgb(187, 183, 183);
+  border: none;
+}
+
+.nickname_window {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 35vh;
+  width: 400px;
+  padding: 20px;
+}
+
+.nickname_window_title {
+  margin-bottom: 10px;
+  font-size: 25px;
+}
+
+.input {
+  font-size: 25px;
+  border-radius: 10px;
+  padding: 10px;
+  border: none;
+}
+
+.nickname_window_input {
+  margin-bottom: 15px;
+}
+
+.login_error {
+  border: 2px solid red;
+}
+
+.login_error_text,
+.login_empty_text {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  background-color: rgba(202, 208, 208, 0.941);
+}
+
+.button:hover {
+  background-color: rgb(171, 177, 177);
+}
+
+.hidden {
+  display: none;
+}
+
+.chat {
+  display: flex;
+  margin-top: 85px;
+}
+
+.chat_clients {
+  padding: 15px 10px;
+  width: 300px;
+  height: fit-content;
+  margin-right: -15px;
+  text-align: center;
+}
+
+.chat_clients_title,
+.online_user {
+  width: 95%;
+}
+
+.chat_clients_title {
+  display: block;
+  font-size: 20px;
+  background-color: rgba(202, 208, 208, 0.941);
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+}
+
+.online_user {
+  background-color: rgb(214, 210, 210);
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-bottom: 7px;
+}
+
+.chat_messages {
+  padding: 20px;
+  width: 600px;
+  height: 620px;
+}
+
+.chat_messages_space {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 510px;
+  overflow-y: auto;
+}
+
+.chat_send_message {
+  width: 100%;
+  display: flex;
+  padding: 20px 0;
+}
+
+.chat_input {
+  width: 80%;
+  margin-right: 10px;
+  resize: none;
+}
+
+.message {
+  border-radius: 10px;
+  padding: 10px 20px;
+  width: fit-content;
+  margin-bottom: 15px;
+  background-color: rgb(214, 210, 210);
+}
+
+.your_message {
+  align-self: flex-end;
+  background-color: rgba(202, 208, 208, 0.941);
+}
+
+.message_username {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.you {
+  font-weight: bold;
+  color: rgb(28, 56, 87);
+}
+
+.message_date {
+  font-style: italic;
+  font-size: 16px;
+}
+
+.message_text {
+  font-size: 18px;
+  margin-bottom: 10px;
+  margin-top: 15px;
+  word-break: break-all;
+  white-space: pre-wrap;
+}
