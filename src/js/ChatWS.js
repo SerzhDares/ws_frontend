@@ -4,7 +4,8 @@ import ChatUI from "./ChatUI";
 export default class ChatWS{
     constructor() {
         this.ws = '';
-        this.url = 'ws://localhost:3000';
+        // this.url = 'ws://localhost:3000';
+        this.url = 'wss://ws-backend-zr1t.onrender.com';
         this.chat = new Chat();
         this.ui = new ChatUI();
     }
@@ -23,13 +24,24 @@ export default class ChatWS{
 
         this.ws.addEventListener('message', (e) => {
             const data = JSON.parse(e.data);
-            console.log(data);
             if (data.type === 'send') {
                 if (data.name === name) {
                     data.name = 'You';
-                    document.querySelector('.chat_messages_space').insertAdjacentHTML('beforeend', this.ui.message('your_message', data.name, new Date().toLocaleString(), data.msg));
+                    this.chat.viewMessages('your_message', data.name, data.date, data.msg);
                 } else {
-                    document.querySelector('.chat_messages_space').insertAdjacentHTML('beforeend', this.ui.message('', data.name, new Date().toLocaleString(), data.msg));
+                    this.chat.viewMessages('', data.name, data.date, data.msg);
+                }
+            } else if (data.type === 'chat') {
+                document.querySelector('.chat_messages_space').innerHTML = '';
+                if (data.chat != []) {
+                    data.chat.forEach(message => {
+                        if (message.name === name) {
+                            message.name = 'You';
+                            this.chat.viewMessages('your_message', message.name, message.date, message.msg);
+                        } else {
+                            this.chat.viewMessages('', message.name, message.date, message.msg);
+                        }
+                    })
                 }
             } else {
                 this.chat.usersOnline(data, name);

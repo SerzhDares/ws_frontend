@@ -46,11 +46,14 @@ export default class Chat {
     document.querySelector('.chat_button').addEventListener('click', () => {
       const message = document.querySelector('.chat_input').value;
       if(!message) return;
-      const newMessage = {type: 'send', name: userName, msg: message};
-      this.messages.push(newMessage);
-      ws.send(JSON.stringify(newMessage, {chat: this.messages}));
+      const newMessage = {type: 'send', name: userName, date: new Date().toLocaleString(), msg: message};
+      ws.send(JSON.stringify(newMessage));
       document.querySelector('.chat_input').value = '';
     })
+  }
+
+  viewMessages(youClass, name, date, message) {
+    document.querySelector('.chat_messages_space').insertAdjacentHTML('beforeend', this.ui.message(youClass, name, date, message));
   }
 
   login() {

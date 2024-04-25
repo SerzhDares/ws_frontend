@@ -2,7 +2,8 @@ import ChatWS from "./ChatWS";
 
 export default class ChatAPI {
     constructor() {
-        this.url = 'http://localhost:3000/'
+        // this.url = 'http://localhost:3000/'
+        this.url = 'https://ws-backend-zr1t.onrender.com/'
     }
 
     async loginToChat(user) {
@@ -16,10 +17,12 @@ export default class ChatAPI {
 
         const result = await request;
         const json = await result.json();
-        new ChatWS().createWS(json.user.name);
+        console.log(json);
+        
         if(!result.ok) {
             return false;
         } else {
+            new ChatWS().createWS(json.user.name);
             return json.user.name;
         }
     }
